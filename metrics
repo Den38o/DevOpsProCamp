@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+import psutil
+import sys
+
+cpu_attr = ['user', 'guest', 'iowait', 'stolen', 'system']
+vmem_attr = ['total', 'used', 'free', 'shared']
+swmem_attr = ['total', 'used', 'free']
+
+if(len(sys.argv)<=1):
+    print('At least one argument required')
+    sys.exit();
+if(sys.argv[1]=='cpu'):
+    print('CPU:')
+    cpu_metrics = psutil.cpu_times(percpu=False)
+    for attr in cpu_attr:
+       if(attr=='stolen'): a='steal'
+       else: a=attr
+       if hasattr(cpu_metrics, a):
+           print('system.cpu.{} {:2}'.format(attr, getattr(cpu_metrics, a)))
+elif(sys.argv[1]=='mem'):
+    print('Mem:')
+    vmem_metrics = psutil.virtual_memory()
+    swmem_metrics = psutil.swap_memory()
+    for attr in vmem_attr:
+        if hasattr(vmem_metrics, attr):
+            print('virtual {} {}'.format(attr, getattr(vmem_metrics, attr)))
+    for attr in swmem_attr:
+        if hasattr(swmem_metrics, attr):
+            print('swap {} {}'.format(attr, getattr(swmem_metrics, attr)))
+else:
+    print('Wrong argument')
