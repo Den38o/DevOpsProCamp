@@ -1,15 +1,4 @@
 # DevOpsProCamp
-DevOps ProCamp
-
-Test task.
-Python3 script to get CPU and/or mem metrics.
-Run ./metric cpu or ./metric mem to get metrics
-
-Tested on Debian 8.2, Python 3.4.2, psutil 5.4.5
-
-
-
-# DevOpsProCamp
 DevOpsProCamp test task description:
 
 As a DevOps engineer you need to collect metrics about your linux server. Unfortunately you cannot use any monitoring solution and need to implement something by your own.
